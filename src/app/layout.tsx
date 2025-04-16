@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";  // Ensure you have your global styles here
+import "./globals.css"; 
 
-// Apply custom fonts (Geist and Geist Mono)
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -13,10 +13,10 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// Set metadata for your project
+
 export const metadata: Metadata = {
-  title: "Personal Finance Tracker",  // Update the title
-  description: "Track and manage your personal finances effectively.",  // Update the description
+  title: "Personal Finance Tracker", 
+  description: "Track and manage your personal finances effectively.", 
 };
 
 export default function RootLayout({
@@ -29,7 +29,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}  // This will render the content of your pages
+        {children}  
       </body>
     </html>
   );

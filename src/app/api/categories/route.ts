@@ -1,8 +1,9 @@
-// ✅ Required imports for App Router API
+// ✅ Required imports for handling API routes in the App Router
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-// Predefined list (Note: This is temporary in-memory storage, consider using a database)
+// ⚡️ Predefined categories for expenses
+// This is a temporary in-memory list (for demo purposes). In production, these would be stored in a database.
 const predefinedCategories: string[] = [
   'Food',
   'Rent',
@@ -11,17 +12,18 @@ const predefinedCategories: string[] = [
   'Entertainment',
 ]
 
-// GET handler
+// 🟢 GET: Fetching all predefined categories
 export async function GET() {
+  // Just returning the current list as JSON
   return NextResponse.json(predefinedCategories)
 }
 
-// POST handler
+// 🔵 POST: Add a new category to the list
 export async function POST(request: NextRequest) {
   const body = await request.json()
   const { category } = body
 
-  // Validate if the category is provided
+  // ✅ Validating if category is provided — simple input check to avoid empty entries
   if (!category) {
     return NextResponse.json(
       { message: 'Category is required' },
@@ -29,7 +31,7 @@ export async function POST(request: NextRequest) {
     )
   }
 
-  // Check if category already exists
+  // 🚫 Preventing duplicates — making sure we don’t re-add an existing category
   if (predefinedCategories.includes(category)) {
     return NextResponse.json(
       { message: 'Category already exists' },
@@ -37,9 +39,9 @@ export async function POST(request: NextRequest) {
     )
   }
 
-  // Add the new category to the list
+  // ➕ Adding the new category to the list
   predefinedCategories.push(category)
 
-  // Return the newly added category with a success status
+  // 🆗 Returning the new category with a 201 status to indicate successful creation
   return NextResponse.json({ category }, { status: 201 })
 }

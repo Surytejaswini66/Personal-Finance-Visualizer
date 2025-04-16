@@ -1,6 +1,3 @@
-// app/page.tsx
-
-// adjust import if path differs
 import Dashboard from "@/components/Dashboard";
 
 export default function Home() {
