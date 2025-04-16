@@ -16,11 +16,9 @@ A web application for tracking income, expenses, and budgets using **Next.js**, 
 
 ## 📦 Installation
 
-```bash
-git clone https://github.com/your-username/personal-finance-visualizer.git
+git clone https://github.com/Surytejaswini66/Personal-Finance-Visualizer.git
 cd personal-finance-visualizer
 npm install
-```
 
 ## ⚙️ Environment Setup
 
@@ -32,9 +30,7 @@ MONGODB_URI=your_mongodb_connection_string
 
 ## 🚀 Run Locally
 
-```bash
 npm run dev
-```
 
 Visit `http://localhost:3000` in your browser.
 
@@ -55,20 +51,6 @@ Visit `http://localhost:3000` in your browser.
 ## 🌐 Live Demo
 
 [Live Application](https://your-live-deployment-url.vercel.app)
-
-## 📁 Folder Structure
-
-```
-/app
-  /api
-  /dashboard
-  ...
-/components
-/models
-/utils
-/public
-/styles
-```
 
 ## 📑 License
 
