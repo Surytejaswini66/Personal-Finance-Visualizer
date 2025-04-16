@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'; 
+import React, { useEffect, useState } from 'react';
 import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 
 interface Transaction {
@@ -14,15 +14,26 @@ interface CategoryData {
 const CategoryPieChart: React.FC = () => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [categoryData, setCategoryData] = useState<CategoryData[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('/api/transactions')
-      .then((res) => res.json())
-      .then((data) => {
+    const fetchTransactions = async () => {
+      try {
+        const response = await fetch('/api/transactions');
+        if (!response.ok) {
+          throw new Error('Failed to fetch transactions');
+        }
+        const data: Transaction[] = await response.json();
         setTransactions(data);
         const aggregatedData = aggregateByCategory(data);
         setCategoryData(aggregatedData);
-      });
+      } catch (error) {
+        setError('Error fetching transactions');
+        console.error(error);
+      }
+    };
+
+    fetchTransactions();
   }, []);
 
   const aggregateByCategory = (data: Transaction[]): CategoryData[] => {
@@ -38,9 +49,21 @@ const CategoryPieChart: React.FC = () => {
     return result;
   };
 
+  if (error) {
+    return <div>{error}</div>;
+  }
+
   return (
     <PieChart width={400} height={400}>
-      <Pie data={categoryData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={150} fill="#8884d8">
+      <Pie
+        data={categoryData}
+        dataKey="value"
+        nameKey="name"
+        cx="50%"
+        cy="50%"
+        outerRadius={150}
+        fill="#8884d8"
+      >
         {categoryData.map((entry, index) => (
           <Cell key={`cell-${index}`} fill={index % 2 === 0 ? '#ff7300' : '#00c49f'} />
         ))}

@@ -2,7 +2,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-// Predefined list
+// Predefined list (Note: This is temporary in-memory storage, consider using a database)
 const predefinedCategories: string[] = [
   'Food',
   'Rent',
@@ -21,6 +21,7 @@ export async function POST(request: NextRequest) {
   const body = await request.json()
   const { category } = body
 
+  // Validate if the category is provided
   if (!category) {
     return NextResponse.json(
       { message: 'Category is required' },
@@ -28,6 +29,17 @@ export async function POST(request: NextRequest) {
     )
   }
 
+  // Check if category already exists
+  if (predefinedCategories.includes(category)) {
+    return NextResponse.json(
+      { message: 'Category already exists' },
+      { status: 400 }
+    )
+  }
+
+  // Add the new category to the list
   predefinedCategories.push(category)
+
+  // Return the newly added category with a success status
   return NextResponse.json({ category }, { status: 201 })
 }

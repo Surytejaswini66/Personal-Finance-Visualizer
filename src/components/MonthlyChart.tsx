@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 // Define the structure of a transaction
 interface Transaction {
@@ -16,6 +16,7 @@ interface MonthlyData {
 const MonthlyChart: React.FC = () => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [monthlyData, setMonthlyData] = useState<MonthlyData[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetch('/api/transactions')
@@ -24,6 +25,10 @@ const MonthlyChart: React.FC = () => {
         setTransactions(data);
         const aggregatedData = aggregateByMonth(data);
         setMonthlyData(aggregatedData);
+      })
+      .catch((err) => {
+        console.error("Error fetching data: ", err);
+        setError("Failed to load data");
       });
   }, []);
 
@@ -33,28 +38,37 @@ const MonthlyChart: React.FC = () => {
 
     // Loop through each transaction to aggregate by month
     data.forEach((transaction) => {
-      const month = new Date(transaction.date).toLocaleString('default', { month: 'short' });
-      const existingMonth = result.find((item) => item.month === month);
+      const date = new Date(transaction.date);
+      const month = date.toLocaleString('default', { month: 'short' });
+      const year = date.getFullYear(); // Extract the year for better grouping
+
+      const existingMonth = result.find((item) => item.month === `${month} ${year}`);
 
       if (existingMonth) {
         existingMonth.amount += transaction.amount;
       } else {
-        result.push({ month, amount: transaction.amount });
+        result.push({ month: `${month} ${year}`, amount: transaction.amount });
       }
     });
 
     return result;
   };
 
+  if (error) {
+    return <div>{error}</div>;  // Display error if fetching fails
+  }
+
   return (
-    <BarChart width={500} height={300} data={monthlyData}>
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="month" />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      <Bar dataKey="amount" fill="#8884d8" />
-    </BarChart>
+    <ResponsiveContainer width="100%" height={300}>
+      <BarChart data={monthlyData}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="month" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Bar dataKey="amount" fill="#8884d8" />
+      </BarChart>
+    </ResponsiveContainer>
   );
 };
 
