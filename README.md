@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Personal Finance Visualizer
 
-## Getting Started
+A web application for tracking income, expenses, and budgets using **Next.js**, **React**, **shadcn/ui**, **Recharts**, and **MongoDB**. Users can visualize personal finance data, categorize transactions, and compare budgets with actual spending.
 
-First, run the development server:
+## 🔧 Tech Stack
+
+- Next.js
+- React
+- shadcn/ui
+- Recharts
+- MongoDB
+- Tailwind CSS
+- TypeScript
+- Zod
+- React Hook Form
+
+## 📦 Installation
+
+```bash
+git clone https://github.com/your-username/personal-finance-visualizer.git
+cd personal-finance-visualizer
+npm install
+```
+
+## ⚙️ Environment Setup
+
+Create a `.env.local` file in the project root:
+
+```env
+MONGODB_URI=your_mongodb_connection_string
+```
+
+## 🚀 Run Locally
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit `http://localhost:3000` in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🔍 Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Add, edit, and delete transactions
+- Categorize transactions
+- View transactions list
+- Visualize monthly expenses using bar charts
+- View expense breakdown by category (pie chart)
+- Set budgets for categories
+- Compare budget vs actual spending
+- Dashboard with total expenses, insights, and recent transactions
+- Responsive UI with shadcn/ui and Tailwind CSS
+- Form validation using Zod and React Hook Form
+- API integration with MongoDB
 
-## Learn More
+## 🌐 Live Demo
 
-To learn more about Next.js, take a look at the following resources:
+[Live Application](https://your-live-deployment-url.vercel.app)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📁 Folder Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+/app
+  /api
+  /dashboard
+  ...
+/components
+/models
+/utils
+/public
+/styles
+```
 
-## Deploy on Vercel
+## 📑 License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is for academic and demonstration purposes only.
