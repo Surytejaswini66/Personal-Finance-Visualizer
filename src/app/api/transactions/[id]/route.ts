@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import Transaction from '../../../../models/transaction';
 
 export async function PUT(req: Request) {
-  const { id } = req.url.split('/').pop()!;
+  const id = req.url.split('/').pop()!;
   const { amount, date, description, category } = await req.json();
   try {
     const updatedTransaction = await Transaction.findByIdAndUpdate(
@@ -17,7 +17,7 @@ export async function PUT(req: Request) {
 }
 
 export async function DELETE(req: Request) {
-  const { id } = req.url.split('/').pop()!;
+  const id = req.url.split('/').pop()!;
   try {
     await Transaction.findByIdAndDelete(id);
     return NextResponse.json({ message: 'Transaction deleted' });
