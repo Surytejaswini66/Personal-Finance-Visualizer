@@ -105,3 +105,7 @@ The primary goal of this Project is to develop a personal finance visualizer web
 #### Deployment
 
 Live URL at https://finance-visualizer.netlify.app/
+
+#### Screenshots of Testing Using Postman
+
+Tested with Postman to ensure all endpoints work as expected. screenshots of the Postman tests, located in the `images` folder
