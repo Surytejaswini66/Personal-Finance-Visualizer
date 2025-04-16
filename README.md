@@ -16,9 +16,11 @@ A web application for tracking income, expenses, and budgets using **Next.js**, 
 
 ## 📦 Installation
 
+```bash
 git clone https://github.com/Surytejaswini66/Personal-Finance-Visualizer.git
 cd personal-finance-visualizer
 npm install
+```
 
 ## ⚙️ Environment Setup
 
